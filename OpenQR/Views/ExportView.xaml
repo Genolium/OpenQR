@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="OpenQR.Views.ExportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:OpenQR.Views"
+             mc:Ignorable="d"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Margin="0,10" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                   Foreground="#FFFFFF" FontFamily="{StaticResource CofoSans}" FontWeight="Regular" 
+                   Text="выберите формат файла"/>
+
+        <Grid Margin="0,15" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Margin="5" Background="White" Grid.Column="0" Width="75" Height="75"
+                    Command="{Binding SelectFormatCommand}"
+                    CommandParameter=".png">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedFormat}" Value=".png">
+                                <Setter Property="BorderBrush" Value="Green"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <TextBlock FontFamily="{StaticResource CofoSans}" FontWeight="Regular" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">PNG</TextBlock>
+            </Button>
+            <Button Margin="5" Background="White" Grid.Column="1" Width="75" Height="75"
+                    Command="{Binding SelectFormatCommand}"
+                    CommandParameter=".jpeg">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedFormat}" Value=".jpeg">
+                                <Setter Property="BorderBrush" Value="Green"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <TextBlock FontFamily="{StaticResource CofoSans}" FontWeight="Regular" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">JPEG</TextBlock>
+            </Button>
+            <Button Margin="5" Background="White" Grid.Column="2" Width="75" Height="75"
+                    Command="{Binding SelectFormatCommand}"
+                    CommandParameter=".pdf">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedFormat}" Value=".pdf">
+                                <Setter Property="BorderBrush" Value="Green"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <TextBlock FontFamily="{StaticResource CofoSans}" FontWeight="Regular" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">PDF</TextBlock>
+            </Button>
+        </Grid>
+
+        <Button Background="#7F5AF0" Margin="8" Width="230" Grid.Row="2" 
+                HorizontalAlignment="Center" Command="{Binding ExportCommand}">
+            <StackPanel Margin="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Width="45">
+                    <svgc:SvgViewbox Width="35" Source="/Static/Icons/check-circle.svg"/>
+                </Label>
+                <Label Foreground="White" FontSize="20" FontFamily="{StaticResource CofoSans}" 
+                       FontWeight="Regular" VerticalAlignment="Center" Content="Экспортировать"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>

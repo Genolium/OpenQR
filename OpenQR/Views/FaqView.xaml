@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="OpenQR.Views.FaqView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenQR.Views"
+        mc:Ignorable="d"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <TextBlock FontSize="16" Foreground="#FFFFFF" FontFamily="{StaticResource CofoSans}" FontWeight="Regular" TextWrapping="Wrap">
+            <Run FontWeight="Bold">Добро пожаловать в OpenQR!</Run> 
+            <LineBreak />
+            <LineBreak />
+            Это приложение поможет вам легко создавать и настраивать QR-коды.  
+            <LineBreak />
+            <LineBreak />
+            <Run FontWeight="Bold">Основные функции:</Run>
+            <LineBreak />
+            - Выбор типа контента для кодирования (текст,  ссылка,  телефон и т.д.).
+            <LineBreak />
+            - Настройка стилей QR-кода (цвета,  градиенты).
+            <LineBreak />
+            - Выбор шаблона дизайна.
+            <LineBreak />
+            - Добавление логотипа.
+            <LineBreak />
+            - Экспорт QR-кода в различные форматы (PNG,  JPEG,  PDF).
+            <LineBreak />
+            <LineBreak />
+            <Run FontWeight="Bold">Как пользоваться приложением:</Run>
+            <LineBreak />
+            1. Выберите тип контента на вкладке "Содержание".
+            <LineBreak />
+            2. Введите данные для кодирования.
+            <LineBreak />
+            3. Настройте стили и дизайн QR-кода на соответствующих вкладках.
+            <LineBreak />
+            4. Добавьте логотип (опционально).
+            <LineBreak />
+            5. Выберите формат файла и экспортируйте QR-код на вкладке "Экспорт".            
+        </TextBlock>
+    </Grid>
+</UserControl>

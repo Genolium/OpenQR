@@ -1,0 +1,48 @@
+﻿<prism:PrismApplication x:Class="OpenQR.App"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:local="clr-namespace:OpenQR"
+xmlns:prism="http://prismlibrary.com/" xmlns:local1="clr-namespace:OpenQR.Services">
+    <Application.Resources>
+        <Style x:Key="MyListBox" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Red" />
+            </Style.Resources>
+        </Style>
+
+        <SolidColorBrush x:Key="MyBackground" Color="Blue" />
+
+        <FontFamily x:Key="CofoSans">pack://application:,,,/Static/Fonts/#CoFo Sans</FontFamily>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#94A1B2"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="190" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#801A1A1C" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ActiveButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#242629" />
+            <Setter Property="Foreground" Value="#FFF" />
+        </Style>
+
+    </Application.Resources>
+</prism:PrismApplication>
