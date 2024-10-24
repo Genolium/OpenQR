@@ -33,6 +33,7 @@ namespace OpenQR.Models
         public string ForegroundColor_Bottom { get; set; }
         public string BackgroundColor { get; set; }
         public ShapeType ModuleShape { get; set; } = ShapeType.Square;
+        public bool FromLeftToRightCorner { get; set; }
         public Bitmap? Logo { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace OpenQR.Services
         private static readonly Regex UrlRegex = new Regex(@"^[a-zA-Z]+://", RegexOptions.Compiled);
 
         // Генерирует изображение QR-кода на основе данных qr.
-        public static Bitmap GenerateQRCodeImage(IQR_CodeData qr, int moduleSize = 10, bool topLeftToBottomRight = true, float cornerRadiusPercent = 25, bool unifiedFinders = true)
+        public static Bitmap GenerateQRCodeImage(IQR_CodeData qr, int moduleSize = 10, float cornerRadiusPercent = 25, bool unifiedFinders = true)
         {
             // Преобразование цветов из строк в объекты Color.
             Color startColor = ColorTranslator.FromHtml(qr.ForegroundColor_Top);
@@ -42,10 +42,20 @@ namespace OpenQR.Services
             int dataSize = Encoding.UTF8.GetByteCount(content);
 
             // Выбор уровня коррекции ошибок в зависимости от размера данных.
-            QrCode.Ecc eccLevel = dataSize < 100 ? QrCode.Ecc.LOW :
+            QrCode.Ecc eccLevel;
+
+            if (qr.Logo == null)
+            {
+                eccLevel = dataSize < 100 ? QrCode.Ecc.LOW :
                                   dataSize < 500 ? QrCode.Ecc.MEDIUM :
                                   dataSize < 1000 ? QrCode.Ecc.QUARTILE :
                                   QrCode.Ecc.HIGH;
+            }
+            else
+            {
+                eccLevel = dataSize < 100 ? QrCode.Ecc.MEDIUM :
+                                  dataSize < 500 ? QrCode.Ecc.QUARTILE : QrCode.Ecc.HIGH;
+            }
 
             // Кодирование текста в QR-код.
             QrCode qrCode = QrCode.EncodeText(content, eccLevel);
@@ -65,7 +75,7 @@ namespace OpenQR.Services
 
                 // Создание градиентной кисти.
                 LinearGradientBrush gradientBrush;
-                if (topLeftToBottomRight)
+                if (qr.FromLeftToRightCorner)
                 {
                     gradientBrush = new LinearGradientBrush(
                         new Point(borderSize, borderSize),
@@ -228,6 +238,52 @@ namespace OpenQR.Services
                 path.CloseFigure();
                 graphics.FillPath(brush, path);
             }
+        }
+
+        // Вычисляет размер модуля на основе размера изображения и данных QR-кода.
+        public static int CalculateModuleSize(IQR_CodeData qr, int imageSize)
+        {
+            // Получение содержимого QR-кода.
+            string content = "";
+            // Если тип данных - ссылка, то добавляем протокол (если он не указан).
+            if (typeof(QR_Link).Name == qr.GetType().Name)
+            {
+                if (!UrlRegex.IsMatch(qr.Content))
+                {
+                    content = ((QR_Link)qr).Protocol + qr.Content;
+                }
+                else
+                    content = qr.Content;
+            }
+            else
+                content = qr.Content;
+
+            // Вычисление размера данных в байтах.
+            int dataSize = Encoding.UTF8.GetByteCount(content);
+
+            // Выбор уровня коррекции ошибок в зависимости от размера данных.
+            QrCode.Ecc eccLevel;
+
+            if (qr.Logo == null)
+            {
+                eccLevel = dataSize < 100 ? QrCode.Ecc.LOW :
+                                  dataSize < 500 ? QrCode.Ecc.MEDIUM :
+                                  dataSize < 1000 ? QrCode.Ecc.QUARTILE :
+                                  QrCode.Ecc.HIGH;
+            }
+            else
+            {
+                eccLevel = dataSize < 100 ? QrCode.Ecc.MEDIUM :
+                                  dataSize < 500 ? QrCode.Ecc.QUARTILE : QrCode.Ecc.HIGH;
+            }
+
+            // Кодирование текста в QR-код.
+            QrCode qrCode = QrCode.EncodeText(content, eccLevel);
+
+            // Вычисление размера модуля.
+            int moduleSize = imageSize / (qrCode.Size + 4);
+
+            return moduleSize;
         }
     }
 }

@@ -6,14 +6,15 @@
              xmlns:local="clr-namespace:OpenQR.Views"
              mc:Ignorable="d"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Margin="0,10" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" 
                    Foreground="#FFFFFF" FontFamily="{StaticResource CofoSans}" FontWeight="Regular" 
@@ -83,5 +84,23 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <xctk:ColorPicker SelectedColor="{Binding ForegroundColor_Top, Mode=TwoWay}" 
+                              AvailableColorsHeader="Доступные цвета"
+                              AvailableColorsSortingMode="HueSaturationBrightness" UsingAlphaChannel="False" ShowStandardColors="False"
+                                Width="90" Margin="5"/>
+            <xctk:ColorPicker SelectedColor="{Binding ForegroundColor_Bottom, Mode=TwoWay}" 
+                              AvailableColorsHeader="Доступные цвета"
+                              AvailableColorsSortingMode="HueSaturationBrightness" UsingAlphaChannel="False" ShowStandardColors="False"
+                                Width="90" Margin="5"/>
+            <xctk:ColorPicker SelectedColor="{Binding BackgroundColor, Mode=TwoWay}" 
+                              UsingAlphaChannel="False" ShowStandardColors="False"
+                              AvailableColorsHeader="Доступные цвета"
+                              AvailableColorsSortingMode="HueSaturationBrightness" 
+                                Width="90" Margin="5"/>
+            <CheckBox Content="Слева направо?" VerticalAlignment="Center" IsChecked="{Binding IsVerticalGradient, Mode=TwoWay}" 
+                      Foreground="White" Margin="5"/>
+        </StackPanel>
     </Grid>
 </UserControl>

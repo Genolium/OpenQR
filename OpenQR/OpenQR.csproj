@@ -47,6 +47,7 @@
     <None Remove="Static\Images\social_media0.png" />
     <None Remove="Static\Images\social_media1.png" />
     <None Remove="Static\Images\social_media10.png" />
+    <None Remove="Static\Images\social_media11.png" />
     <None Remove="Static\Images\social_media2.png" />
     <None Remove="Static\Images\social_media3.png" />
     <None Remove="Static\Images\social_media4.png" />
@@ -59,9 +60,13 @@
 
   <ItemGroup>
     <Content Include="Static\Icons\qr-code-app-icon.ico" />
+    <Content Include="Static\Images\social_media11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="PDFsharp" Version="6.1.1" />
     <PackageReference Include="Prism.Unity" Version="9.0.537" />

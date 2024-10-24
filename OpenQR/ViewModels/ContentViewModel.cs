@@ -48,20 +48,20 @@ namespace OpenQR.ViewModels
                     // Создание объекта данных QR-кода в зависимости от выбранного типа кодирования.
                     switch (_selectedEncodingType)
                     {
-                        case EncodingType.ТЕКСТ:
+                        case EncodingType.TEXT:
                             _qrCodeService.code = new QR_Text(_qr.Content, _qr.ForegroundColor_Top, _qr.ForegroundColor_Bottom, _qr.BackgroundColor, _qr.Logo, _qr.ModuleShape);
                             break;
-                        case EncodingType.ССЫЛКА:
+                        case EncodingType.LINK:
                             _qrCodeService.code = new QR_Link("https://vk.com", _qr.ForegroundColor_Top, _qr.ForegroundColor_Bottom, _qr.BackgroundColor, _qr.Logo, "http://", _qr.ModuleShape);
                             break;
-                        case EncodingType.ТЕЛЕФОН:
-                            _qrCodeService.code = new QR_Link("+79515554433", _qr.ForegroundColor_Top, _qr.ForegroundColor_Bottom, _qr.BackgroundColor, _qr.Logo, "tel:", _qr.ModuleShape);
+                        case EncodingType.PHONE:
+                            _qrCodeService.code = new QR_Link("+78005553535", _qr.ForegroundColor_Top, _qr.ForegroundColor_Bottom, _qr.BackgroundColor, _qr.Logo, "tel:", _qr.ModuleShape);
                             break;
-                        case EncodingType.ПОЧТА:
+                        case EncodingType.EMAIL:
                             _qrCodeService.code = new QR_Text("your_mail@gmail.com", _qr.ForegroundColor_Top, _qr.ForegroundColor_Bottom, _qr.BackgroundColor, _qr.Logo, _qr.ModuleShape);
                             break;
-                        case EncodingType.WhatsApp:
-                            _qrCodeService.code = new QR_Link("+79515554433", _qr.ForegroundColor_Top, _qr.ForegroundColor_Bottom, _qr.BackgroundColor, _qr.Logo, "https://api.whatsapp.com/send?phone=", _qr.ModuleShape);
+                        case EncodingType.WHATSAPP:
+                            _qrCodeService.code = new QR_Link("+78005553535", _qr.ForegroundColor_Top, _qr.ForegroundColor_Bottom, _qr.BackgroundColor, _qr.Logo, "https://api.whatsapp.com/send?phone=", _qr.ModuleShape);
                             break;
                     }
                     // Обновление данных QR-кода и уведомление об изменении свойств.

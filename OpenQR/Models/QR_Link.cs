@@ -50,6 +50,7 @@ namespace OpenQR.Models
         public string BackgroundColor { get; set; }
         public ShapeType ModuleShape { get; set; }
         public string Protocol { get; private set; } = "http://";
+        public bool FromLeftToRightCorner { get; set; }
         public Bitmap? Logo { get; set; }
     }
 }

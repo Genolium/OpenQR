@@ -9,16 +9,8 @@ namespace OpenQR.Models
         public string ForegroundColor_Bottom { get; set; }
         public string BackgroundColor { get; set; }
         ShapeType ModuleShape { get; set; }
-        public Bitmap? Logo { get; set; }
         public string Content { get; set; }
-    }
-
-    public enum EncodingType
-    {
-        ТЕКСТ,
-        ССЫЛКА,
-        ТЕЛЕФОН,
-        ПОЧТА,
-        WhatsApp
+        public bool FromLeftToRightCorner { get; set; }
+        public Bitmap? Logo { get; set; }        
     }
 }

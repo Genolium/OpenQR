@@ -8,6 +8,7 @@ namespace OpenQR.Services
     {
         // Данные QR-кода.
         IQR_CodeData code { get; set; }
+        int ModuleSize { get; set; }
 
         // Сгенерированное изображение QR-кода.
         Bitmap generatedCode { get; }

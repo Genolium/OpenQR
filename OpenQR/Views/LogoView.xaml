@@ -13,6 +13,7 @@
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Margin="0,10" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFFFFF" FontFamily="{StaticResource CofoSans}" FontWeight="Regular" Text="выберите логотип для QR"></TextBlock>
 
@@ -112,6 +113,31 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
+        <Button Grid.Row="4" Content="Загрузить логотип" 
+                Command="{Binding LoadLogoCommand}" 
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                Margin="0,0,0,10" Width="100" Height="100">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#2CB67D" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="BorderBrush" Value="#2CB67D" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="FontSize" Value="11" />
+                    <Setter Property="FontFamily" Value="{StaticResource CofoSans}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" Background="{TemplateBinding Background}" 
+                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </UserControl>

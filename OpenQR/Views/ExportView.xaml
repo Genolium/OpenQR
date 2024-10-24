@@ -12,7 +12,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Margin="0,10" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" 
                    Foreground="#FFFFFF" FontFamily="{StaticResource CofoSans}" FontWeight="Regular" 
@@ -73,7 +75,20 @@
             </Button>
         </Grid>
 
-        <Button Background="#7F5AF0" Margin="8" Width="230" Grid.Row="2" 
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10">
+            <TextBlock FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
+           Foreground="#FFFFFF" FontFamily="{StaticResource CofoSans}" FontWeight="Light" 
+           Text="выберите выходное разрешение изображения:"/><TextBlock FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" 
+           Foreground="#FFFFFF" FontFamily="{StaticResource CofoSans}" FontWeight="Light" 
+           Text="{Binding GetLengthString}"/>
+            <Slider
+                Minimum="100" Maximum="4000"
+                Value="{Binding Length, Mode=TwoWay}"
+                TickFrequency="100" 
+                IsSnapToTickEnabled="True" />
+        </StackPanel>
+
+        <Button Background="#7F5AF0" Margin="0,8,0,0" Width="230" Grid.Row="3" 
                 HorizontalAlignment="Center" Command="{Binding ExportCommand}">
             <StackPanel Margin="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Width="45">
@@ -81,6 +96,14 @@
                 </Label>
                 <Label Foreground="White" FontSize="20" FontFamily="{StaticResource CofoSans}" 
                        FontWeight="Regular" VerticalAlignment="Center" Content="Экспортировать"/>
+            </StackPanel>
+        </Button>
+
+        <Button Background="White" Grid.Row="4" 
+        HorizontalAlignment="Center" Command="{Binding OpenFolderCommand}">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Foreground="#7F5AF0" FontSize="10" FontFamily="{StaticResource CofoSans}" 
+               FontWeight="Regular" VerticalAlignment="Center" Content="Открыть папку с генерациями"/>
             </StackPanel>
         </Button>
     </Grid>

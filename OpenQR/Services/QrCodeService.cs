@@ -9,6 +9,19 @@ namespace OpenQR.Services
     {
         // Данные QR-кода.
         private IQR_CodeData _code;
+        private int _moduleSize = 80;
+        public int ModuleSize
+        {
+            get => _moduleSize; 
+            set
+            {
+                _moduleSize = value;
+                // Генерация изображения QR-кода.
+                generatedCode = QrCodeGenerator.GenerateQRCodeImage(code, _moduleSize);
+                // Вызов события обновления QR-кода.
+                QrCodeUpdated?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         // Свойство для доступа к данным QR-кода. При изменении данных генерируется новый QR-код.
         public IQR_CodeData code
@@ -20,7 +33,7 @@ namespace OpenQR.Services
                 try
                 {
                     // Генерация изображения QR-кода.
-                    generatedCode = QrCodeGenerator.GenerateQRCodeImage(code, 80, true);
+                    generatedCode = QrCodeGenerator.GenerateQRCodeImage(code, ModuleSize);
                     // Вызов события обновления QR-кода.
                     QrCodeUpdated?.Invoke(this, EventArgs.Empty);
                 }

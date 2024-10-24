@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Input;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace OpenQR.ViewModels
 {
@@ -15,6 +17,7 @@ namespace OpenQR.ViewModels
     {
         // Выбранный формат экспорта.
         private string _selectedFormat = ".png";
+        private int _length = 2000;
 
         // Свойство для доступа к выбранному формату экспорта.
         public string SelectedFormat
@@ -26,6 +29,21 @@ namespace OpenQR.ViewModels
             }
         }
 
+        public int Length
+        {
+            get => _length;
+            set
+            {
+                SetProperty(ref _length, value);
+                _qrCodeService.ModuleSize = QrCodeGenerator.CalculateModuleSize(_qrCodeService.code, _length);
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(Length)));
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(GetLengthString)));
+            }
+        }
+
+        public string GetLengthString { get => $@"{Length}x{Length} пикс."; }
+
+
         // Сервис для работы с QR-кодом.
         private readonly IQrCodeService _qrCodeService;
 
@@ -34,7 +52,8 @@ namespace OpenQR.ViewModels
         {
             _qrCodeService = qrCodeService;
             // Инициализация команды экспорта.
-            ExportCommand = new DelegateCommand(() => {
+            ExportCommand = new DelegateCommand(() =>
+            {
                 // Экспорт QR-кода в файл с указанным форматом и текущей датой и временем в имени.
                 ExportQRCode($@"images/qr_{DateTime.Now:yyyyMMdd_HHmmss_fff}{SelectedFormat}");
             });
@@ -45,12 +64,22 @@ namespace OpenQR.ViewModels
                 // Установка выбранного формата.
                 SelectedFormat = format;
             });
+
+            OpenFolderCommand = new DelegateCommand(() =>
+            {
+                string directoryPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\images";
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);                   
+                }
+                // Открываем папку в проводнике
+                Process.Start("explorer.exe", directoryPath);
+            });
         }
 
-        // Команда для экспорта QR-кода.
         public ICommand ExportCommand { get; }
-        // Команда для выбора формата экспорта.
         public ICommand SelectFormatCommand { get; }
+        public ICommand OpenFolderCommand { get; }
 
         // Получает информацию о кодеке изображения по MIME-типу.
         private static ImageCodecInfo GetEncoderInfo(String mimeType)
@@ -70,11 +99,18 @@ namespace OpenQR.ViewModels
         private void ExportQRCode(string filePath)
         {
             // Получение изображения QR-кода из сервиса.
+            _qrCodeService.ModuleSize = QrCodeGenerator.CalculateModuleSize(_qrCodeService.code, Length);
             Bitmap qrCodeBitmap = _qrCodeService.generatedCode;
 
             // Проверка наличия изображения.
             if (qrCodeBitmap != null)
             {
+                string directoryPath = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
                 // Экспорт в зависимости от выбранного формата.
                 switch (SelectedFormat)
                 {

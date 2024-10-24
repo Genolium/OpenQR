@@ -22,7 +22,7 @@
 
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" FontSize="18" 
+                        <TextBlock Text="{Binding Converter={StaticResource EnumToDisplayConverter}}"  FontSize="18" 
                                    FontFamily="{StaticResource CofoSans}" 
                                    FontWeight="Regular" 
                                    Foreground="White" Margin="10,0,0,0">                            
@@ -32,11 +32,11 @@
 
                 <ComboBox.ItemsSource>
                     <x:Array Type="{x:Type models:EncodingType}">
-                        <models:EncodingType>ТЕКСТ</models:EncodingType>
-                        <models:EncodingType>ССЫЛКА</models:EncodingType>
-                        <models:EncodingType>ТЕЛЕФОН</models:EncodingType>
-                        <models:EncodingType>ПОЧТА</models:EncodingType>
-                        <models:EncodingType>WhatsApp</models:EncodingType>
+                        <models:EncodingType>TEXT</models:EncodingType>
+                        <models:EncodingType>LINK</models:EncodingType>
+                        <models:EncodingType>PHONE</models:EncodingType>
+                        <models:EncodingType>EMAIL</models:EncodingType>
+                        <models:EncodingType>WHATSAPP</models:EncodingType>
                     </x:Array>
                 </ComboBox.ItemsSource>
 
@@ -84,7 +84,7 @@
                                                         <Label Width="35" VerticalAlignment="Center" HorizontalAlignment="Center">
                                                             <svgc:SvgViewbox Source="/Static/Icons/arrow-down.svg"/>
                                                         </Label>
-                                                        <TextBlock Text="{Binding}" FontSize="32" 
+                                                        <TextBlock Text="{Binding Converter={StaticResource EnumToDisplayConverter}}" FontSize="32" 
                                                            FontFamily="{StaticResource CofoSans}" 
                                                            FontWeight="Bold" Foreground="#2CB67D">                                                            
                                                         </TextBlock>

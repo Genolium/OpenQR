@@ -43,16 +43,93 @@ namespace OpenQR.ViewModels
                 selectedStyle.IsSelected = true;
 
                 // Обновление цветов QR-кода.
+                ForegroundColor_Top = selectedStyle.ForegroundColor_Top;
+                ForegroundColor_Bottom = selectedStyle.ForegroundColor_Bottom;
+                BackgroundColor = selectedStyle.BackgroundColor;
+            });
+        }
+
+        private string _foregroundColorTop = "#000000";
+        public string ForegroundColor_Top
+        {
+            get { return _foregroundColorTop; }
+            set
+            {
+                SetProperty(ref _foregroundColorTop, value);
+                UpdateSelectedStyle();
+            }
+        }
+
+        private string _foregroundColorBottom = "#000000";
+        public string ForegroundColor_Bottom
+        {
+            get { return _foregroundColorBottom; }
+            set
+            {
+                SetProperty(ref _foregroundColorBottom, value);
+                UpdateSelectedStyle();
+            }
+        }
+
+        private string _backgroundColor = "#FFFFFF";
+        public string BackgroundColor
+        {
+            get { return _backgroundColor; }
+            set
+            {
+                SetProperty(ref _backgroundColor, value);
+                UpdateSelectedStyle();
+            }
+        }
+
+        private void UpdateSelectedStyle()
+        {
+            ButtonStyle selectedStyle = null;
+
+            foreach (var style in StylesRow1)
+            {
+                if (style.IsSelected)
+                {
+                    selectedStyle = style;
+                    break;
+                }
+            }
+
+            if (selectedStyle == null)
+            {
+                foreach (var style in StylesRow2)
+                {
+                    if (style.IsSelected)
+                    {
+                        selectedStyle = style;
+                        break;
+                    }
+                }
+            }
+
+            if (selectedStyle != null)
+            {
                 if (_qrCodeService.code != null)
                 {
                     IQR_CodeData qr = _qrCodeService.code;
-                    qr.ForegroundColor_Top = selectedStyle.ForegroundColor_Top;
-                    qr.ForegroundColor_Bottom = selectedStyle.ForegroundColor_Bottom;
-                    qr.BackgroundColor = selectedStyle.BackgroundColor;
-                    // Обновление QR-кода в сервисе.
+                    qr.ForegroundColor_Top = ForegroundColor_Top;
+                    qr.ForegroundColor_Bottom = ForegroundColor_Bottom;
+                    qr.BackgroundColor = BackgroundColor;
+                    qr.FromLeftToRightCorner = IsVerticalGradient;
                     _qrCodeService.code = qr;
                 }
-            });
+            }
+        }
+
+        private bool _isVerticalGradient = true;
+        public bool IsVerticalGradient
+        {
+            get => _isVerticalGradient;
+            set
+            {
+                SetProperty(ref _isVerticalGradient, value);
+                UpdateSelectedStyle();
+            }
         }
     }
 
