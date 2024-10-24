@@ -12,7 +12,7 @@ namespace OpenQR.Models
         PHONE,
         [Display(Name = "ПОЧТА")]
         EMAIL,
-        [Display(Name = "WhatsApp")]
+        [Display(Name = "WHATSAPP")]
         WHATSAPP
     }
 }

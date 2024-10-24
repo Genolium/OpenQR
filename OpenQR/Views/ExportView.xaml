@@ -78,7 +78,8 @@
         <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10">
             <TextBlock FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
            Foreground="#FFFFFF" FontFamily="{StaticResource CofoSans}" FontWeight="Light" 
-           Text="выберите выходное разрешение изображения:"/><TextBlock FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" 
+           Text="выберите выходное разрешение изображения:"/>
+            <TextBlock FontSize="23" VerticalAlignment="Center" HorizontalAlignment="Center" 
            Foreground="#FFFFFF" FontFamily="{StaticResource CofoSans}" FontWeight="Light" 
            Text="{Binding GetLengthString}"/>
             <Slider
