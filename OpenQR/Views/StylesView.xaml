@@ -36,6 +36,18 @@
                         </Button.Background>
                         <Button.Style>
                             <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="BorderBrush" Value="Transparent" />
                                 <Setter Property="BorderThickness" Value="2" />
                                 <Style.Triggers>
@@ -68,6 +80,18 @@
                         </Button.Background>
                         <Button.Style>
                             <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="BorderBrush" Value="Transparent" />
                                 <Setter Property="BorderThickness" Value="2" />
                                 <Style.Triggers>
